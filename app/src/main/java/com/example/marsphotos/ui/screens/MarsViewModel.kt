@@ -28,8 +28,7 @@ import com.example.marsphotos.MarsPhotosApplication
 import com.example.marsphotos.data.MarsPhotosRepository
 import com.example.marsphotos.model.MarsPhoto
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
+
 
 /**
  * UI state for the Home screen
@@ -61,9 +60,7 @@ class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi
             marsUiState = MarsUiState.Loading
             marsUiState = try {
                 MarsUiState.Success(marsPhotosRepository.getMarsPhotos())
-            } catch (e: IOException) {
-                MarsUiState.Error
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 MarsUiState.Error
             }
         }
